@@ -1,7 +1,7 @@
 horizontal_thickness = 1.12; // 0.28의 배수로 설정
 vertical_thickness = 1.2; // 0.4의 배수로 설정
 
-smoothness = 1000; // 원의 매끈도
+smoothness = 500; // 원의 매끈도
 
 module main_body() {
     radius = 126 / 2;
