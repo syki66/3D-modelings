@@ -44,7 +44,7 @@ module handle() {
     }
 }
 
-module sink_strainer(){
+module sink_strainer_cover(){
     union(){
         difference(){
             plate();
@@ -59,4 +59,4 @@ module sink_strainer(){
     }
 }
 
-sink_strainer();
+sink_strainer_cover();
