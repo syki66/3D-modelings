@@ -56,8 +56,9 @@ module body_column() {
     difference() {
         translate([0,0,fixing_parts_height])            
             cylinder(r = radius, h = height - fixing_parts_height, $fn=smoothness);
+            
             translate([0,0,0])
-                cylinder(r = radius - vertical_thickness, h = height, $fn = smoothness);
+                cylinder(r = radius - vertical_thickness, h = height - horizontal_thickness, $fn = smoothness);
     }
 }
 
@@ -71,7 +72,10 @@ module body_holes_bottom(){
     for (j = [0 : len(count)]){
         for (i =  [0 : count[j] : 6]) {
             translate([sin(360*i/6)*distance, cos(360*i/6)*distance, 0 ])
-            cylinder(r=radius, h = height, $fn=smoothness);
+                linear_extrude(height=height)
+                    circle(r=radius, $fn=smoothness);
+            
+            //cylinder(r=radius, h = height, $fn=smoothness);
         }
         distance = distance + 2.5 * j;
     }
@@ -85,7 +89,10 @@ module body_holes_side() {
     for (j = [1 : 26])
     for (i =  [0 : 0.05 : 6]) {
         translate([sin(360*i/6)*distance, cos(360*i/6)*distance, j*3 ])
-        cylinder(r=radius, h = height, $fn=smoothness);
+            linear_extrude(height=height)
+                circle(r=radius, $fn=smoothness);
+        
+        //cylinder(r=radius, h = height, $fn=smoothness);
     }
 }
 
@@ -96,3 +103,7 @@ module sink_strainer(){
 }
 
 sink_strainer();
+
+//body_holes_bottom();
+
+//body_holes_side();
