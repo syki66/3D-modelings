@@ -8,8 +8,8 @@ body_height = 214.6;
 horizontal_thickness = 1.12;
 vertical_thickness = 1.2;
 
-bolt_hole_radius = 1.6;
-distance_between_bolt_holes = 20 - (bolt_hole_radius*2);
+bolt_hole_radius = 1.8;
+distance_between_bolt_holes = 13.3 + (bolt_hole_radius*2);
 bolt_hole_z_height = 32;
 
 tire_hole_radius = 7.5;
@@ -84,9 +84,10 @@ module main_body() {
 difference(){
     main_body();
     
-    //translate([-150,-70,-30])
-    //cube([300,300,100]);
+    
+    translate([-150,-70,-30])
+    cube([300,300,100]);
 
-    //translate([-230,-160,-30])
-    //cube([300,300,100]);
+    translate([-230,-160,-30])
+    cube([300,300,100]);
 }
