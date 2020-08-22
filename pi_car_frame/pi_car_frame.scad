@@ -25,7 +25,7 @@ module body_frame() {
         cube([body_width, body_height, (internal_z_height + horizontal_thickness) ], center=true);
         
         translate([0, 0, (horizontal_thickness / 2)])
-            cube([body_width-(vertical_thickness*2), body_height-(vertical_thickness*2), internal_z_height ], center=true);
+            cube([body_width-(vertical_thickness*2), body_height-(vertical_thickness*2), internal_z_height + 1], center=true);
     }
 }
 
@@ -48,13 +48,13 @@ module holes(){
     two_tire_holes(0, tire_hole_z_height);
     two_tire_holes((body_height / 2) - distance_between_bolt_holes - vertical_thickness, tire_hole_z_height);
     
-    bottom_holes( (body_width/2) - motor_bottom_hole_distance , 0 );
-    bottom_holes( (body_width/2) - motor_bottom_hole_distance , distance_between_bolt_holes + vertical_thickness - (body_height / 2) );
-    bottom_holes( (body_width/2) - motor_bottom_hole_distance , (body_height / 2) - distance_between_bolt_holes - vertical_thickness );
+    bottom_hole( (body_width/2) - motor_bottom_hole_distance , 0 );
+    bottom_hole( (body_width/2) - motor_bottom_hole_distance , distance_between_bolt_holes + vertical_thickness - (body_height / 2) );
+    bottom_hole( (body_width/2) - motor_bottom_hole_distance , (body_height / 2) - distance_between_bolt_holes - vertical_thickness );
     
-    bottom_holes( -((body_width/2) - motor_bottom_hole_distance), 0 );
-    bottom_holes( -((body_width/2) - motor_bottom_hole_distance), distance_between_bolt_holes + vertical_thickness - (body_height / 2));
-    bottom_holes( -((body_width/2) - motor_bottom_hole_distance), (body_height / 2) - distance_between_bolt_holes - vertical_thickness);
+    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), 0 );
+    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), distance_between_bolt_holes + vertical_thickness - (body_height / 2));
+    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), (body_height / 2) - distance_between_bolt_holes - vertical_thickness);
 }
 
 module two_tire_holes(y,z){
@@ -68,9 +68,9 @@ module two_tire_holes(y,z){
             }
 }
 
-module bottom_holes(x,y){
+module bottom_hole(x,y){
     translate([x,y,0])
-        cylinder(r = motor_bottom_hole_radius, h = horizontal_thickness, $fn=smoothness);
+        cylinder(r = motor_bottom_hole_radius, h = horizontal_thickness*2, $fn=smoothness);
 }
 
 module main_body() {
@@ -81,5 +81,4 @@ module main_body() {
     }
 }
 
-//bottom_holes();
 main_body();
