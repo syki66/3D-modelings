@@ -9,13 +9,13 @@ horizontal_thickness = 1.12;
 vertical_thickness = 1.2;
 
 bolt_hole_radius = 1.8;
-distance_between_bolt_holes = 13.3 + (bolt_hole_radius*2);
+distance_between_bolt_holes = 13.7 + (bolt_hole_radius*2);
 bolt_hole_z_height = 32;
 
 tire_hole_radius = 7.5;
-tire_hole_z_height = 11;
+tire_hole_z_height = 13;
 
-motor_bottom_hole_distance = 9.3;
+motor_bottom_hole_distance = 11.3;
 motor_bottom_hole_radius = 5;
 
     
@@ -61,7 +61,7 @@ module two_tire_holes(y,z){
     translate([-body_width/2, y, horizontal_thickness + z])
         rotate([0,90,0])
             hull(){
-                translate([-8,0,0])
+                translate([-6,0,0])
                     cylinder(r=tire_hole_radius, h = body_width, $fn=smoothness);
                 
                 cylinder(r=tire_hole_radius, h = body_width, $fn=smoothness);
@@ -90,4 +90,5 @@ difference(){
 
     translate([-230,-160,-30])
     cube([300,300,100]);
+    
 }
