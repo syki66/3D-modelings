@@ -22,7 +22,7 @@ camera_hole_width = 25.3;
 camera_hole_thickness = 1.2;
 camera_white_space_width = 1.2;
 
-sonic_hole_radius = 9;
+sonic_hole_radius = 8.5;
 distance_between_sonic_holes = 26.4;
 sonic_hole_z_height = 25.8;
 
@@ -144,7 +144,7 @@ module holes(){
     );
     sonic_hole(
         body_width/4,
-        -body_height/2,
+        -body_height/2 + vertical_thickness,
         sonic_hole_z_height,
         true
     );
@@ -163,7 +163,7 @@ difference(){
     main_body();
     
     
-    /*
+    
     translate([-150,-210,-30])
     cube([300,300,100]);
     
@@ -172,6 +172,6 @@ difference(){
 
     translate([-380,-180,-30])
     cube([300,300,100]);
-    */
+    
     
 }
