@@ -18,6 +18,8 @@ tire_hole_z_height = 13;
 motor_bottom_hole_distance = 11.3;
 motor_bottom_hole_radius = 5;
 
+camera_hole_width = 25.3;
+
     
 module body_frame() {    
     translate([0,0, (internal_z_height + horizontal_thickness) / 2])
@@ -39,24 +41,6 @@ module bolt_hole_pair(y,z){
             cylinder(r=bolt_hole_radius, h = body_width, $fn=smoothness);
 }
 
-module holes(){
-    bolt_hole_pair(distance_between_bolt_holes + vertical_thickness - (body_height / 2), bolt_hole_z_height);
-    bolt_hole_pair(0, bolt_hole_z_height);
-    bolt_hole_pair((body_height / 2) - distance_between_bolt_holes - vertical_thickness, bolt_hole_z_height);
-    
-    two_tire_holes(distance_between_bolt_holes + vertical_thickness - (body_height / 2), tire_hole_z_height);
-    two_tire_holes(0, tire_hole_z_height);
-    two_tire_holes((body_height / 2) - distance_between_bolt_holes - vertical_thickness, tire_hole_z_height);
-    
-    bottom_hole( (body_width/2) - motor_bottom_hole_distance , 0 );
-    bottom_hole( (body_width/2) - motor_bottom_hole_distance , distance_between_bolt_holes + vertical_thickness - (body_height / 2) );
-    bottom_hole( (body_width/2) - motor_bottom_hole_distance , (body_height / 2) - distance_between_bolt_holes - vertical_thickness );
-    
-    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), 0 );
-    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), distance_between_bolt_holes + vertical_thickness - (body_height / 2));
-    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), (body_height / 2) - distance_between_bolt_holes - vertical_thickness);
-}
-
 module two_tire_holes(y,z){
     translate([-body_width/2, y, horizontal_thickness + z])
         rotate([0,90,0])
@@ -73,6 +57,31 @@ module bottom_hole(x,y){
         cylinder(r = motor_bottom_hole_radius, h = horizontal_thickness*2, $fn=smoothness);
 }
 
+module camera_hole(){
+    translate([0, (body_height / 2) - (vertical_thickness / 2), (internal_z_height + horizontal_thickness) - (camera_hole_width / 2) ])
+    cube([camera_hole_width, 10, camera_hole_width], center=true);
+}
+
+module holes(){
+    bolt_hole_pair(distance_between_bolt_holes + vertical_thickness - (body_height / 2), bolt_hole_z_height);
+    bolt_hole_pair(0, bolt_hole_z_height);
+    bolt_hole_pair((body_height / 2) - distance_between_bolt_holes - vertical_thickness, bolt_hole_z_height);
+    
+    two_tire_holes(distance_between_bolt_holes + vertical_thickness - (body_height / 2), tire_hole_z_height);
+    two_tire_holes(0, tire_hole_z_height);
+    two_tire_holes((body_height / 2) - distance_between_bolt_holes - vertical_thickness, tire_hole_z_height);
+    
+    bottom_hole( (body_width/2) - motor_bottom_hole_distance , 0 );
+    bottom_hole( (body_width/2) - motor_bottom_hole_distance , distance_between_bolt_holes + vertical_thickness - (body_height / 2) );
+    bottom_hole( (body_width/2) - motor_bottom_hole_distance , (body_height / 2) - distance_between_bolt_holes - vertical_thickness );
+    
+    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), 0 );
+    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), distance_between_bolt_holes + vertical_thickness - (body_height / 2));
+    bottom_hole( -((body_width/2) - motor_bottom_hole_distance), (body_height / 2) - distance_between_bolt_holes - vertical_thickness);
+    
+    camera_hole();
+}
+
 module main_body() {
     difference(){
         body_frame();
@@ -83,12 +92,16 @@ module main_body() {
 
 difference(){
     main_body();
+    camera_hole();
     
+    translate([-150,-210,-30])
+    cube([300,300,100]);
     
-    translate([-150,-70,-30])
+    translate([20,-180,-30])
     cube([300,300,100]);
 
-    translate([-230,-160,-30])
+    translate([-320,-180,-30])
     cube([300,300,100]);
+    
     
 }
