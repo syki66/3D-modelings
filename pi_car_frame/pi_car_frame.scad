@@ -22,6 +22,10 @@ camera_hole_width = 25.3;
 camera_hole_thickness = 1.2;
 camera_white_space_width = 1.2;
 
+sonic_hole_radius = 8;
+distance_between_sonic_holes = 10 + (sonic_hole_radius * 2);
+sonic_hole_z_height = 25.8;
+
     
 module body_frame() {    
     translate([0,0, (internal_z_height + horizontal_thickness) / 2])
@@ -67,6 +71,27 @@ module camera_hole(){
     cube([camera_hole_width - camera_white_space_width, camera_hole_thickness * 3, camera_hole_width], center=true);
 }
 
+module sonic_hole(x, y, z, rotate){
+    if (rotate == true) {
+        translate([x + (distance_between_sonic_holes / 2), y, horizontal_thickness + z])
+            rotate([90,0,0])
+                cylinder(r=sonic_hole_radius, h = vertical_thickness, $fn=smoothness);
+        
+        translate([x - (distance_between_sonic_holes / 2), y, horizontal_thickness + z])
+            rotate([90,0,0])
+                cylinder(r=sonic_hole_radius, h = vertical_thickness, $fn=smoothness);
+    }
+    else {
+        translate([x, y + (distance_between_sonic_holes / 2), horizontal_thickness + z])
+            rotate([0,90,0])
+                cylinder(r=sonic_hole_radius, h = vertical_thickness, $fn=smoothness);
+        
+        translate([x, y - (distance_between_sonic_holes / 2), horizontal_thickness + z])
+            rotate([0,90,0])
+                cylinder(r=sonic_hole_radius, h = vertical_thickness, $fn=smoothness);
+    }
+}
+
 module holes(){
     bolt_hole_pair(distance_between_bolt_holes + vertical_thickness - (body_height / 2), bolt_hole_z_height);
     bolt_hole_pair(0, bolt_hole_z_height);
@@ -85,6 +110,32 @@ module holes(){
     bottom_hole( -((body_width/2) - motor_bottom_hole_distance), (body_height / 2) - distance_between_bolt_holes - vertical_thickness);
     
     camera_hole();
+    
+    sonic_hole( 
+        body_width/2 - vertical_thickness,
+        ((body_height / 2) - distance_between_bolt_holes - vertical_thickness) / 2,
+        sonic_hole_z_height,
+        false
+    );
+    sonic_hole( 
+        -(body_width/2),
+        (distance_between_bolt_holes + vertical_thickness - (body_height / 2)) / 2,
+        sonic_hole_z_height,
+        false
+    );
+    sonic_hole(
+        -body_width/4,
+        body_height/2,
+        sonic_hole_z_height,
+        true
+    );
+    sonic_hole(
+        body_width/4,
+        -body_height/2,
+        sonic_hole_z_height,
+        true
+    );
+
 }
 
 module main_body() {
@@ -97,8 +148,9 @@ module main_body() {
 
 difference(){
     main_body();
-    camera_hole();
     
+    
+    /*
     translate([-150,-210,-30])
     cube([300,300,100]);
     
@@ -107,6 +159,7 @@ difference(){
 
     translate([-320,-180,-30])
     cube([300,300,100]);
-    
+    */
     
 }
+
