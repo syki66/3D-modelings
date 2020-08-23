@@ -159,19 +159,4 @@ module main_body() {
     }
 }
 
-difference(){
-    main_body();
-    
-    
-    
-    translate([-150,-210,-30])
-    cube([300,300,100]);
-    
-    translate([-30,-180,-30])
-    cube([300,300,100]);
-
-    translate([-380,-180,-30])
-    cube([300,300,100]);
-    
-    
-}
+main_body();
