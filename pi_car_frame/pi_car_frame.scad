@@ -26,8 +26,8 @@ sonic_hole_radius = 9;
 distance_between_sonic_holes = 26.4;
 sonic_hole_z_height = 25.8;
 
-sonic_center_hole_width = 11;
-sonic_center_hole_height = 10;
+sonic_center_hole_width = 10;
+sonic_center_hole_height = 5;
 sonic_center_hole_z_height = 33.3;
 
     
@@ -71,8 +71,8 @@ module camera_hole(){
     translate([0, (body_height / 2) - (vertical_thickness / 2), (internal_z_height + horizontal_thickness) - (camera_hole_width / 2) ])
     cube([camera_hole_width, camera_hole_thickness, camera_hole_width + camera_white_space_width], center=true);
     
-    translate([0, (body_height / 2) - (vertical_thickness / 2), (internal_z_height + horizontal_thickness) - (camera_hole_width / 2) ])
-    cube([camera_hole_width - camera_white_space_width, camera_hole_thickness * 3, camera_hole_width], center=true);
+    translate([0, (body_height / 2) - (vertical_thickness / 2), (internal_z_height + horizontal_thickness) - (camera_hole_width / 2) + 0.5])
+    cube([camera_hole_width - camera_white_space_width, camera_hole_thickness * 3, camera_hole_width+1], center=true);
 }
 
 module sonic_hole(x, y, z, rotate){
@@ -163,7 +163,7 @@ difference(){
     main_body();
     
     
-    
+    /*
     translate([-150,-210,-30])
     cube([300,300,100]);
     
@@ -172,6 +172,6 @@ difference(){
 
     translate([-380,-180,-30])
     cube([300,300,100]);
-    
+    */
     
 }
