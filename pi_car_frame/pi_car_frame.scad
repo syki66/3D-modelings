@@ -5,8 +5,8 @@ internal_z_height = 38;
 body_width = 214.6;
 body_height = 214.6;
 
-horizontal_thickness = 1.12;
-vertical_thickness = 1.2;
+horizontal_thickness = 0.28 * 10;
+vertical_thickness = 0.4 * 7;
 
 bolt_hole_radius = 1.8;
 distance_between_bolt_holes = 13.9 + (bolt_hole_radius*2);
@@ -24,8 +24,8 @@ module body_frame() {
     difference(){
         cube([body_width, body_height, (internal_z_height + horizontal_thickness) ], center=true);
         
-        translate([0, 0, (horizontal_thickness / 2)])
-            cube([body_width-(vertical_thickness*2), body_height-(vertical_thickness*2), internal_z_height + 1], center=true);
+        translate([0, 0, horizontal_thickness / 2])
+            cube([body_width-(vertical_thickness*2), body_height-(vertical_thickness*2), internal_z_height], center=true);
     }
 }
 
