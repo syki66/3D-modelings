@@ -19,6 +19,8 @@ motor_bottom_hole_distance = 11.3;
 motor_bottom_hole_radius = 5;
 
 camera_hole_width = 25.3;
+camera_hole_thickness = 1.2;
+camera_white_space_width = 1.2;
 
     
 module body_frame() {    
@@ -59,7 +61,10 @@ module bottom_hole(x,y){
 
 module camera_hole(){
     translate([0, (body_height / 2) - (vertical_thickness / 2), (internal_z_height + horizontal_thickness) - (camera_hole_width / 2) ])
-    cube([camera_hole_width, 10, camera_hole_width], center=true);
+    cube([camera_hole_width, camera_hole_thickness, camera_hole_width + camera_white_space_width], center=true);
+    
+    translate([0, (body_height / 2) - (vertical_thickness / 2), (internal_z_height + horizontal_thickness) - (camera_hole_width / 2) ])
+    cube([camera_hole_width - camera_white_space_width, camera_hole_thickness * 3, camera_hole_width], center=true);
 }
 
 module holes(){
