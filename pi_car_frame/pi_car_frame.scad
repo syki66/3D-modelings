@@ -9,7 +9,7 @@ horizontal_thickness = 1.12;
 vertical_thickness = 1.2;
 
 bolt_hole_radius = 1.8;
-distance_between_bolt_holes = 13.7 + (bolt_hole_radius*2);
+distance_between_bolt_holes = 13.9 + (bolt_hole_radius*2);
 bolt_hole_z_height = 32;
 
 tire_hole_radius = 7.5;
