@@ -5,7 +5,7 @@ vertical_thickness = 0.4 * 7; // 0.4의 배수로 설정
 smoothness = 100; // 원의 매끈도
 
 module main_body() {
-    radius = 127 / 2;
+    radius = 126 / 2;
     height = 66.5;
     
     hole_radius = 22 / 2;
