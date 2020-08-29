@@ -1,3 +1,12 @@
+# Print Settings
+
+- Resolution: 0.28mm
+- Nossle : 0.4mm
+- Infill : 50%
+- Supports: No
+
+---
+
 ## sink_strainer v2
 
 - 높이를 13.5mm 낮춤

@@ -1,5 +1,17 @@
 # pi_car_frame
 
+
+---
+
+# Print Settings
+
+- Resolution: 0.28mm
+- Nossle : 0.4mm
+- Infill : 20%
+- Supports: No
+
+---
+
 ## 개선할 사항
 
 - 각면에 dc모터 구멍세트 4개씩 달수 있도록 하기
