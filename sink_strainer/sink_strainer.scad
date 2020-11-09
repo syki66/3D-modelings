@@ -1,6 +1,6 @@
 
-horizontal_thickness = 0.28 * 10; // 0.28의 배수로 설정
-vertical_thickness = 0.4 * 7; // 0.4의 배수로 설정
+horizontal_thickness = 0.28 * 3; // 0.28의 배수로 설정
+vertical_thickness = 0.4 * 3; // 0.4의 배수로 설정
 
 smoothness = 100; // 원의 매끈도
 
@@ -69,12 +69,12 @@ module body_column() {
     difference() {
         translate([0,0,fixing_parts_height])
             union(){
-                cylinder(r = 6.425, h = height - fixing_parts_height, $fn=smoothness);
+                cylinder(r = 8.4, h = height - fixing_parts_height, $fn=smoothness);
                 translate([0,0,horizontal_thickness])
-                cylinder(h=20, r1=12.4, r2=6.425, $fn = smoothness);
+                cylinder(h=20, r1=11+vertical_thickness/2, r2=8.4, $fn = smoothness);
             }
             translate([0,0,0])
-                cylinder(r = 3.625, h = height - horizontal_thickness, $fn = smoothness);
+                cylinder(r = 6, h = height - horizontal_thickness, $fn = smoothness);
     }
 }
 
@@ -106,7 +106,7 @@ module body_holes_bottom(){
 }
 
 module body_holes_side() {
-    height =  horizontal_thickness*6;
+    height =  horizontal_thickness*22;
     
     for (i = [1:36]){
         translate([0,0,(height/2) + horizontal_thickness])

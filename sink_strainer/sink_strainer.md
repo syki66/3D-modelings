@@ -1,5 +1,6 @@
 # Print Settings
 
+- Material : PETG
 - Resolution: 0.28mm
 - Nossle : 0.4mm
 - Infill : 50%
@@ -17,5 +18,6 @@
 
 ## sink_strainer v2.1
 
-- [x] 반지름 0.5mm 줄이기
-- [] 기둥 안쪽 너비 더 늘리기
+- 전체 반지름 0.5mm 줄임
+- 기둥 안쪽 구멍 너비 3mm 정도 넓힘
+- petg 출력을 위해 두께를 약 1.2mm로 조정
