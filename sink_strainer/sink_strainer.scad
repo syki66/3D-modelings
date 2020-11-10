@@ -150,3 +150,5 @@ module sink_strainer(){
 }
 
 sink_strainer();
+
+cylinder(r = 126/2, h = 0.28, $fn = smoothness);
