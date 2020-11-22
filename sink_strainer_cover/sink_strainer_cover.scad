@@ -4,7 +4,9 @@ height = 10; // 높이
 horizontal_thickness = 1.12; // 0.28의 배수로 설정
 vertical_thickness = 1.2; // 0.4의 배수로 설정
 
-smoothness = 1000; // 원의 매끈도
+handle_width = 10; // 손잡이 두께께
+
+smoothness = 100; // 원의 매끈도
 
 module hole() {
     distance = 0;
@@ -33,14 +35,15 @@ module plate() {
 }
 
 module handle() {
-    handle_length = 50;
-    handle_width = 5;
-    
     difference(){
-        translate([-(handle_length / 2), -(handle_width / 2), 0]){
-            cube([handle_length, handle_width, height]);
-        }
-        cube([40,10,10], center=true);
+        
+        rotate([90,0,0])
+            rotate_extrude()
+                translate([radius-handle_width,0,0])
+                    circle(r = handle_width, $fn = smoothness);
+            
+        translate([0,0,-radius])
+            cube([radius*2,radius*2,radius*2], center=true);    
     }
 }
 
@@ -60,3 +63,14 @@ module sink_strainer_cover(){
 }
 
 sink_strainer_cover();
+
+
+
+
+
+
+
+
+
+
+
