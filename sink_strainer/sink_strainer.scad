@@ -1,154 +1,98 @@
+radius = 126 / 2; // 반지름
+bttm_radius = radius / 1.3; // 원기둥 밑면 반지름
+height = 66.5; // 높이
 
-horizontal_thickness = 0.28 * 3; // 0.28의 배수로 설정
-vertical_thickness = 0.4 * 3; // 0.4의 배수로 설정
+smoothness = 100; // 매끈도
 
-smoothness = 100; // 원의 매끈도
+// 벽두께
+h_thick = 0.28 * 7; // 0.28의 배수로 설정
+v_thick = 0.4 * 5; // 0.4의 배수로 설정
 
-module main_body() {
-    radius = 126 / 2;
-    height = 66.5;
-    
-    hole_radius = 22 / 2;
-    hole_height = 15;
-    
-    difference() {
-        cylinder(r = radius, h = height, $fn=smoothness);
-
-        translate([0,0,horizontal_thickness]){
-            cylinder(r = radius - vertical_thickness, h = height, $fn = smoothness);
-        }
-        
-        cylinder(r = hole_radius, h = hole_height, $fn = smoothness);
-        
-        body_holes_bottom();
-        
-        body_holes_side();
-    }
-}
-
-
-module fixing_parts() {
-    radius = 22 / 2;
-    height = 15;
-    
-    hole_radius = 9.65 / 2;
-    
-    cube_width = 3;
-    
-    h_thick=1.4;
-    v_thick=1.2;
-
-    rotate([180,0,0])
-        translate([0,0,-height])
-            difference() {
-                cylinder(r = radius, h = height, $fn=smoothness);
-                
-                for (i = [0:7])
-                    rotate([0,0,i*45])
-                        translate([ -(cube_width / 2), -radius + v_thick, h_thick ])
-                            cube([cube_width, radius, height]);
-                
-                cylinder(r = hole_radius - v_thick, h = height, $fn = smoothness);
-            }
-    
+module body(){
     difference(){
-        cylinder(r = radius+vertical_thickness/2, h = height+horizontal_thickness, $fn=smoothness);
-        
-        cylinder(r = radius, h = height, $fn=smoothness);
-        
-        cylinder(r = hole_radius - v_thick, h = height*2, $fn = smoothness);
-    }
-    
-}
-
-module body_column() {
-    height = 60;
-    
-    fixing_parts_height = 15;
-    
-    difference() {
-        translate([0,0,fixing_parts_height])
-            union(){
-                cylinder(r = 8.4, h = height - fixing_parts_height, $fn=smoothness);
-                translate([0,0,horizontal_thickness])
-                cylinder(h=20, r1=11+vertical_thickness/2, r2=8.4, $fn = smoothness);
-            }
-            translate([0,0,0])
-                cylinder(r = 6, h = height - horizontal_thickness, $fn = smoothness);
+        cylinder(h=height, r1=bttm_radius, r2=radius, $fn = smoothness);
+        body_hole();
+        side_holes();
+        bottom_holes();
     }
 }
 
-module body_holes_bottom(){
-    for (i = [1:18]){
-        render() // 경고문구 회피하려고
-            rotate([0,0,10*i])
-                difference(){
-                    cube([115, 1.5, horizontal_thickness*2], center=true);
-                    
-                    cube([40, 1.5, horizontal_thickness*2], center=true);
-                }
+module body_hole(){
+    difference(){
+        cylinder(h=height, r1=bttm_radius-v_thick, r2=radius-v_thick, $fn = smoothness);
+        cylinder(h=h_thick, r=radius, $fn = smoothness);
     }
-                
-    radius = 1;
-    height = horizontal_thickness;
+    cylinder(h=h_thick, r=11, $fn=smoothness); // fixture 구멍
+}
 
-    count = [0.3, 0.2];
-    distance = 14.5;
-
-    for (j = [0 : len(count)]){
-        for (i =  [0 : count[j] : 6]) {
-            translate([sin(360*i/6)*distance, cos(360*i/6)*distance, 0 ])
-                linear_extrude(height=height)
-                    circle(r=radius, $fn=smoothness);
+// 측면 구멍
+module side_holes(){
+    size = 3;
+    count = 29;
+    angle = 6;
+    floor_height = 5;
+    floor_count = 12;
+    
+    for (j=[0:floor_count])
+        rotate([0,0,j*angle/2])
+        translate([0,0,j*floor_height])
+        
+        // 한개의 구멍층
+        union(){
+            r = size/2;
+            translate([0,0,h_thick+r])
+            for (i=[0:count])
+                rotate([90,0,i*angle])
+                    cylinder(r=r, h=radius*2, $fn=20, center=true);
         }
-        distance = distance + 3.2 * j;
+}
+
+// 바닥면 구멍
+module bottom_holes(){
+    size = 1;
+    count = 17;
+    for (i=[0:count])
+        rotate([0,0,i*10])
+            cube([bttm_radius*2 - (v_thick*3), size, h_thick*2], center=true);
+}
+
+module fixture(thk){
+    difference(){
+        union(){
+            cylinder(r=11+(v_thick*thk), h=15+(h_thick*thk), $fn=smoothness);
+            translate([0,0,15+(h_thick*thk)]) // 이음매 보강재
+                cylinder(h=height/2, r1=11+(v_thick*thk), r2=5.5, $fn = smoothness);
+        }
+        fixture_hole();
+        cylinder(r=5.5, h=height, $fn=smoothness); //column 구멍
     }
 }
 
-module body_holes_side() {
-    height =  horizontal_thickness*22;
-    
-    for (i = [1:36]){
-        translate([0,0,(height/2) + horizontal_thickness])
-            render() // 경고문구 회피하려고
-                rotate([0,0,5*i])
-                    difference(){
-                        cube([130, 1.5, height], center=true);
-                        
-                        cube([110, 1.5, height], center=true);
-                    }
-    }
-    
-    for (i = [1:36]){
-        translate([0,0, 32 ])
-            render() // 경고문구 회피하려고
-                rotate([0,0,5*i])
-                    difference(){
-                        cube([130, 1.5, height], center=true);
-                        
-                        cube([110, 1.5, height], center=true);
-                    }
-    }
-    
-    for (i = [1:36]){
-        translate([0,0, 53 ])
-            render() // 경고문구 회피하려고
-                rotate([0,0,5*i])
-                    difference(){
-                        cube([130, 1.5, height], center=true);
-                        
-                        cube([110, 1.5, height], center=true);
-                    }
-    }
-    
+module fixture_hole(){
+    difference(){
+        cylinder(r=11, h=15, $fn=smoothness);
+        translate([0,0,7.5])
+            cube([11*2, 0.4*4, 15], center=true);
+    }    
 }
 
-module sink_strainer(){
-    fixing_parts();
-    body_column(); 
-    main_body();
+module handle(thk){
+    difference(){
+        translate([0,0,15])
+            cylinder(r=5.5+(v_thick*thk), h=45+(h_thick*thk), $fn=smoothness);
+        handle_hole();
+    }
 }
 
-sink_strainer();
+module handle_hole(){
+    translate([0,0,15])
+        cylinder(r=5.5, h=45, $fn=smoothness);
+}
 
-cylinder(r = 126/2, h = 0.28, $fn = smoothness);
+module main(){
+    body();
+    fixture(2);
+    handle(2);
+}
+
+main();
