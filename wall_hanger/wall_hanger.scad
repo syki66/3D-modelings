@@ -1,11 +1,11 @@
 smoothness = 100;
 
 hole = 4 / 2;
-thick = 0.4 * 7;
-width = 0.28 * 10;
+thick = 0.4 * 14;
+width = 0.28 * 20;
 bar_len = 30;
 bar_height = 30;
-radius = 10;
+radius = 15;
 
 translate([-thick,0,0])
     rotate([0,0,270])
