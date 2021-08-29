@@ -1,3 +1,7 @@
+# [sink_strainer_cover.stl](https://github.com/syki66/binary/blob/master/3D-modelings/sink_strainer_cover.stl)
+
+---
+
 # Print Settings
 
 - Resolution: 0.28mm

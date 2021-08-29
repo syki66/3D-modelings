@@ -1,3 +1,7 @@
+# [sink_strainer.stl](https://github.com/syki66/binary/blob/master/3D-modelings/sink_strainer.stl)
+
+---
+
 # Print Settings
 
 - Material : PETG
