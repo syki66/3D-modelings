@@ -8,6 +8,7 @@
 - Nossle : 0.4mm
 - Infill : 50~100%
 - Supports: Yes
+- Brim Line Count : 10~
 
 ---
 
