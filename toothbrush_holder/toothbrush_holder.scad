@@ -6,10 +6,12 @@ depth = 40; // 클립 깊이
 width = 20; // 클립 가로
 height = thick * 2 + inner_thick; // 클립 세로
 
-bridge_radius = 70; // 연결부 지름
+radius = 70; // 연결부 지름
 bridge_thick = 3; // 연결부 두께
 
-brush_thick = 5.2; // 칫솔 두께
+brush_thick = 0.28 * 20; // 칫솔 두께
+
+hang = 30; // 칫솔 거는부분 길이
 
 difference(){
     cube([height, depth, width]);
@@ -18,16 +20,22 @@ difference(){
         cube([inner_thick, depth - thick, width]);
 }
 
-difference(){
-translate([height, bridge_radius + depth, 0])
-    rotate([0,0,30])
-        rotate_extrude(angle=-120)
-            translate([bridge_radius, 0, 0])
-                square([bridge_thick, width]);
 
-translate([height - 5, bridge_radius + depth, width / 2 - brush_thick / 2])
-    rotate([0,0,30])
-        rotate_extrude(angle=-30)
-            translate([bridge_radius, 0, 0])
-                square([bridge_thick + 10, brush_thick]);
+translate([height, radius + depth, 0])
+    rotate_extrude(angle=-90)
+        translate([radius, 0, 0])
+            square([bridge_thick, width]);
+
+difference(){
+    union(){
+        translate([height + radius,depth + radius,0])
+            cube([thick, hang, width]);
+
+        translate([height, radius + depth + hang, 0])
+            rotate_extrude(angle=30)
+                translate([radius, 0, 0])
+                    square([bridge_thick, width]);
+    }
+    translate([0,0,(width - brush_thick) / 2])
+        cube([radius*10, radius*10, brush_thick]);
 }

@@ -4,11 +4,17 @@
 
 # Print Settings
 
-- Resolution: `칫솔두께의 약수`
+- Resolution: 0.28mm
 - Nossle : 0.4mm
 - Infill : 50~100%
 - Supports: Yes
 - Brim Line Count : 10~
+
+---
+
+## toothbrush_holder.stl v3.0.1 (2021-11-14)
+
+- 칫솔 걸이 부분을 평평하게 변경함
 
 ---
 
