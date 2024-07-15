@@ -1,16 +1,13 @@
-wallWidth=100;
-wallHeight=50;
-wallThick=10;
-neckWidth=100;
-neckHeight=20;
-neckLength=100;
+for (i = [-300:300]){
+    singleLayer([0, -0.0001*i*i, i*0.1]);
+}
 
-cube([wallWidth, wallHeight, wallThick]);
-difference(){
-    translate([wallWidth/2, 0, 0]){
-        scale([neckWidth*0.1, neckHeight*0.1, 1]) cylinder(h=neckLength, d=10, $fn=100);
-    }
-    translate([0, -wallHeight, 0]){
-        cube([wallWidth, wallHeight, neckLength]);
-    }
+module singleLayer (array) {
+    translate(array)
+        linear_extrude(height=0.1){
+            union(){
+                    offset(2)offset(-2)
+                        polygon([[0,0],[0,170],[10,170],[10,90],[20,80],[30,75],[40,70],[80,70], [90,72], [100, 74], [100, 64], [90, 62], [80,60], [10,60],[10,0], [0,0]]);
+            }    
+        }
 }

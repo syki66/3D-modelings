@@ -7,6 +7,6 @@
 - Material : PLA
 - Resolution: -
 - Nossle : -
-- Infill : 50%
+- Infill : 35%
 - Supports: No
 - Brim Line Count : -
