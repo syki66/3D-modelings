@@ -1,8 +1,6 @@
 # [toothbrush_holder.stl](https://github.com/syki66/binary/blob/master/3D-modelings/toothbrush_holder.stl)
 
----
-
-# Print Settings
+## Print Settings
 
 - Material : PLA
 - Resolution: -

@@ -1,8 +1,6 @@
 # [controller_holder.stl](https://github.com/syki66/binary/blob/master/3D-modelings/controller_holder.stl)
 
----
-
-# Print Settings
+## Print Settings
 
 - Material : PLA
 - Resolution: -
