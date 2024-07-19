@@ -1,17 +1,14 @@
-smoothness = 100;
+thick=6;
+length=12;
 
-hole = 4 / 2;
-thick = 0.4 * 14;
-width = 0.28 * 20;
-bar_len = 30;
-bar_height = 30;
-radius = 15;
+translate([20,0,length+thick])
+rotate([-90,-90,0])
+    rotate_extrude(angle=180, $fn=100)
+        translate([length,10-thick/2,0])
+                offset(1.5)offset(-1.5)
+                    square([thick,thick]);
 
-translate([-thick,0,0])
-    rotate([0,0,270])
-        cube([30,thick,bar_height]);
-
-translate([-(radius+thick), -bar_len, (bar_height/2)-(width/2) ])
-rotate_extrude(angle=-180, $fn=smoothness)
-    translate([radius,0,0])
-        square([thick,width]);
+linear_extrude(thick, $fn=100)
+    offset(2)offset(-2)
+        polygon(points=[[0,0],[20,0],[20,20],[0,20]]);
+    
