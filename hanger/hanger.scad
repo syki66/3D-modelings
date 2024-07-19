@@ -28,10 +28,34 @@ module hanger_vertical(width, thick, length, extenderLength) {
 
 module hanger_horizontal(width, thick, length, extenderLength) {
     body(width, thick);
-    translate([length+thick,width/2-thick/2,0])
+    translate([length+width,0,0])
         rotate([270,0,0])
             hook(thick, length, extenderLength);
 }
 
+module multi_hanger(number, thick, holderWidth, hookLength, hookExtenderLength){
+    interval = 2.5*(thick+hookLength);
+    for(i=[0:number]){
+        if (i == number){
+            translate([0,i * interval,0])
+            rotate([90,0,0])
+                body(holderWidth, thick);
+        } 
+        else {
+            translate([0,i*interval,0])
+                union(){
+                    translate([0,-thick,thick])
+                        rotate([-90,0,0])
+                            body(thick, interval);
+                    translate([thick,-hookLength-thick,0])
+                        rotate([0,0,-90])
+                            hook(thick, hookLength, hookExtenderLength);
+                }
+        }
+    }
+}
+
 // hanger_vertical(width=20, thick=6, length=12, extenderLength=0); // 수직 걸이
-hanger_horizontal(width=20, thick=6, length=35, extenderLength=60); // 수평 걸이
+// hanger_horizontal(width=20, thick=6, length=35, extenderLength=60); // 수평 걸이
+
+multi_hanger(number=5, thick=7, holderWidth=40, hookLength=10, hookExtenderLength=20); // 멀티 걸이
