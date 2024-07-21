@@ -19,7 +19,7 @@
 - Resolution: -
 - Nossle : -
 - Infill : 20%
-- Supports: Not necessary
+- Supports: No
 - Brim Line Count : -
 
 ## [multi_hanger.stl](https://github.com/syki66/binary/blob/master/3D-modelings/multi_hanger.stl)
@@ -29,6 +29,6 @@
 - Material : PLA
 - Resolution: -
 - Nossle : -
-- Infill : 20%
-- Supports: Not necessary
+- Infill : 10%
+- Supports: No
 - Brim Line Count : -
