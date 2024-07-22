@@ -7,8 +7,8 @@ difference(){
         rotate([0,-angle,0]){
             difference(){
                 rotate([0,angle,0])
-                    cylinder(h=100+thick, d=width+thick*2);
-                translate([-40,-(width+thick*2)/2,])
+                    cylinder(h=100+thick, d=width+thick*2, $fn=100);
+                translate([-40-thick/2,-(width+thick*2)/2,])
                     cube([40,40,60]);
                 }
         }
@@ -17,43 +17,19 @@ difference(){
             rotate([0,-angle,0]){
                 difference(){
                     rotate([0,angle,0])
-                        cylinder(h=100+thick, d=width);
+                        cylinder(h=100+thick, d=width, $fn=100);
                     translate([-40,-(width+thick*2)/2,])
                         cube([40,40,60]);
                     }
             }
     }
-
-    for(i=[0:3]){
-        translate([0,0,60 + i*12])
-        holes(8);
-    }
-   
-    translate([0,0,48])
-        holes(5);
     
-    translate([0,0,36])
-        holes(5);    
-    
-    rotate([0,0,45])
-        translate([0,0,24])
-            holes(3);
-    
-    rotate([0,0,45])
-        translate([0,0,12])
-            holes(3);
-
-    rotate([0,45,0])
-        rotate([0,0,45])
-            translate([0,0,12])
-                holes(3);
-
+    hole(width=30, height=15, thick=10);
 }
 
-module holes(num) {
-    for(j=[0:num-1]){
-        rotate([90,0,j*45])
-            translate([0,0,20])
-                cylinder(h=width, d=7, center=true);
-    }
+module hole (width, height, thick){
+    translate([10,-width/2,-1])
+        rotate([90,0,90])
+            linear_extrude(thick)
+                polygon([[0, 0],[width / 2, height + 1],[width, 0]]);
 }
