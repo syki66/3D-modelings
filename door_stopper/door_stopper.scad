@@ -1,9 +1,9 @@
-height=10;
+height=20;
 thick=6;
-holeThick=2;
-holeAngle=225;
+holeThick=2.4;
+holeAngle=235;
 holeRadius=20;
-neckLength=10;
+neckLength=15;
 
 module door_stopper(type){
     // head
@@ -15,10 +15,10 @@ module door_stopper(type){
                 
             rotate([0,0,holeAngle])
                 translate([holeRadius+holeThick/2,0,0])
-                cylinder(h=10, d=holeThick, $fn=100);    
+                cylinder(h=height, d=holeThick, $fn=100);    
                 
             translate([holeRadius+holeThick/2,0,0])
-                cylinder(h=10, d=holeThick, $fn=100);    
+                cylinder(h=height, d=holeThick, $fn=100);    
         }
     }
     if (type == str("male")){
