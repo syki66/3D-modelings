@@ -41,5 +41,5 @@ module holder(thick, height){
                 square([width, thick]);
 }
 
-trash_can(2); // 쓰레기통
+trash_can(1.2); // 쓰레기통
 //holder(thick=5, height=60); // 걸이

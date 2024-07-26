@@ -1,21 +1,26 @@
-width=100;
-height=100;
+width=160;
 thick=3;
 
 cube([width,10,thick]);
 
-translate([0,10+thick,0])
-    rotate([90,0,0])
-        cube([width,10,thick]);
+translate([width-thick, 0, 2])
+        rotate([0,20,20])
+            cube([thick,10,100]);
 
-translate([90,0,0])        
-    cube([10,10,10]);
+translate([192,0,94])
+    rotate([0,-5,15])
+        camera_holder(width=30, height=40, holeWidth=0, holeThick=0, holderWidth=0);
+//        camera_holder(width=30, height=40, holeWidth=25.3, holeThick=2, holderWidth=1.3);
 
-translate([width-10, 8, 4])
-    rotate([-45,0,-52])
-        union(){
-            cube([10, thick, height * 1.48]);
-            translate([0, 3, height * 1.45])
-                rotate([55,0,0])
-                cube([20,thick,30]);
-        }
+
+module camera_holder(width, height, holeWidth, holeThick, holderWidth){
+    translate([0,width,height])
+        rotate([180,0,0])
+            difference(){
+                cube([thick, width, height]);
+                translate([0,(width-holeWidth)/2+holderWidth/2,0])
+                    cube([thick, holeWidth-holderWidth, holeWidth]);
+                translate([thick/2-holeThick/2,(width-holeWidth)/2,0])
+                    cube([holeThick, holeWidth, holeWidth]);
+            }
+}
